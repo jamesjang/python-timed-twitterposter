@@ -83,24 +83,6 @@ def startTweet():
     result = session.post('https://twitter.com/i/tweet/create', cookies = cookies, params = params, headers =dict(referer = 'https://www.twitter.com/'))
     print(result.text)
 
-
 scheduler.add_job(startTweet, 'interval', hours=1)
-
-class perpetualTimer():
-    def __init__(self, t, hFunction):
-        self.t = t  
-        self.hFunction = hFunction
-        self.thread = Timer(self.t, self.handle_function)
-
-    def handle_function(self):
-        self.hFunction()
-        self.thread = Timer(self.t, self.handle_function)
-        self.thread.start()
-
-    def start(self):
-        self.thread.start()
-
-    def cancel(self):
-        self.thread.cancel()
 
 window.mainloop()
